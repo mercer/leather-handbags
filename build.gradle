@@ -4,11 +4,7 @@ apply plugin: 'sonar-runner'
 sourceCompatibility = 1.8
 
 allprojects {
-    ext.baseVersion = "0.1"
-    ext.snapshotVersion = true
-
-    group = "org.codehaus.sonar"
-    version = "$baseVersion" + (snapshotVersion ? "-SNAPSHOT" : "")
+    apply from: "$rootDir/gradle/versioning.gradle"
 }
 
 subprojects {
