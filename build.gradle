@@ -13,6 +13,11 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
+    sonarRunner {
+        sonarProperties {
+            property "sonar.sourceEncoding", "UTF-8"
+        }
+    }
 }
 
 repositories {
@@ -31,5 +36,6 @@ sonarRunner {
         property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
         property "sonar.jdbc.username", "sonar"
         property "sonar.jdbc.password", "sonar"
+        property "sonar.sourceEncoding", "UTF-8"
     }
 }
