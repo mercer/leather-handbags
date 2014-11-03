@@ -1,7 +1,19 @@
 apply plugin: 'java'
+apply plugin: 'sonar-runner'
 
-sourceCompatibility = 1.5
-version = '1.0'
+sourceCompatibility = 1.8
+
+allprojects {
+    ext.baseVersion = "0.1"
+    ext.snapshotVersion = true
+
+    group = "org.codehaus.sonar"
+    version = "$baseVersion" + (snapshotVersion ? "-SNAPSHOT" : "")
+}
+
+subprojects {
+    apply plugin: 'java'
+}
 
 repositories {
     mavenCentral()
@@ -9,4 +21,8 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+sonarRunner {
+    toolVersion = '2.4'
 }
