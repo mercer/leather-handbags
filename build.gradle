@@ -1,10 +1,42 @@
 apply plugin: 'java'
 apply plugin: 'sonar-runner'
+apply plugin: 'maven-publish'
 
-sourceCompatibility = 1.8
+group = 'io.mercer.handbags'
+
+def env = project.hasProperty('env') ? project.getProperty('env') : 'test'
+logger.quiet "Loading configuration for environment '$env'."
+
+def configFile = file("$rootDir/gradle/config/buildConfig.groovy")
+def parsedConfig = new ConfigSlurper(env).parse(configFile.toURL())
 
 allprojects {
     apply from: "$rootDir/gradle/versioning.gradle"
+    ext.config = parsedConfig
+}
+
+ext.fullRepoUrl = "$config.binaryRepository.url/$config.binaryRepository.name"
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+
+    publications
+
+
+    repositories {
+        maven {
+            url fullRepoUrl
+
+            credentials {
+                username = config.binaryRepository.username
+                password = config.binaryRepository.password
+            }
+        }
+    }
 }
 
 subprojects {
