@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
- 
+
 # Check for nsenter. If not found, install it
 boot2docker ssh '[ -f /var/lib/boot2docker/nsenter ] || docker run --rm -v /var/lib/boot2docker/:/target jpetazzo/nsenter'
  
