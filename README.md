@@ -6,6 +6,7 @@ TODO
 - [x] external sonar configuration for sonar-runner gradle plugin
 - build the deployable artifact
 - add build info into the artifact
+- sonar-mysql and sonar data outside of containers
 
 Questions
 -----------
