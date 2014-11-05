@@ -7,26 +7,24 @@ TODO
 - build the deployable artifact
 - add build info into the artifact
 - sonar-mysql and sonar data outside of containers
+- expose the appliance's ports to localhost
+- extend Dockerfiles to install plugins on jenkins and sonar
+- add jenkins jobs to git
+- scripts for windows
+- scripts for linux
 
 Questions
 -----------
 - docker: started on 192.168.59.103:8080; how do I expose it on lan? on internet?
 - docker: how do i get it on a digitalocean instance?
 - docker: how to save/provision jenkins settings, plugins, build pipelines?
+- docker: linked containers dependencies when starting? can a container start it's dependencies, wait for them to be completely started, then start itself?
 
 Appliances
 --------------------------
-docker build -t="mercer/jenkins" .
-docker build -t="mercer/sonar-mysq" .
-docker build -t="mercer/sonar" .
-
-docker run -itd -p 8080:8080 -v /Users/emilianl/jenkins:/var/jenkins_home mercer/jenkins
-docker run -itd -p 3306:3306 mercer/sonar-mysql
-docker run -itd -p 9000:9000 --link [generated]:db mercer/sonar
-
-
-Default user and password for mysql is sonar:123qwe
-
+- jenkins
+- sonar-mysql
+- sonar; default user and password for mysql is sonar:123qwe
 
 What if
 ---------
@@ -50,3 +48,23 @@ FLUSH PRIVILEGES;
 
 subl /usr/local/Cellar/sonar/4.x/libexec/conf/sonar.properties
 subl /usr/local/Cellar/sonar-runner/2.4/libexec/conf/sonar-runner.properties
+
+Add docker host to hosts file
+------------------------------
+echo $(docker-ip) dockerhost | sudo tee -a /etc/hosts
+
+Usefull docker scripts for your shell config
+-------------------------------------------------
+export DOCKER_HOST=tcp://192.168.59.103:2376
+export DOCKER_CERT_PATH=/Users/emilianl/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
+
+docker-ip() {
+  boot2docker ip 2> /dev/null
+}
+
+docker-enter() {
+  boot2docker ssh '[ -f /var/lib/boot2docker/nsenter ] || docker run --rm -v /var/lib/boot2docker/:/target jpetazzo/nsenter'
+  boot2docker ssh -t sudo /var/lib/boot2docker/docker-enter "$@"
+}
+
