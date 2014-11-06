@@ -65,7 +65,7 @@ sonarRunner {
     toolVersion = '2.4'
     sonarProperties {
         property "sonar.host.url", "http://$sonarUrl/"
-        property "sonar.jdbc.url", "jdbc:mysql://$sonarMysqlUrlgit s/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true"
+        property "sonar.jdbc.url", "jdbc:mysql://$sonarMysqlUrl/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true"
         property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
         property "sonar.jdbc.username", "sonar"
         property "sonar.jdbc.password", "123qwe"
