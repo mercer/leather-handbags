@@ -1,6 +1,25 @@
 Leather Handbags: The Demo Store
 ----------------------------------
 
+Broadleaf
+----------
+- fork DemoSite
+- gradle wrapper
+- gradlew init
+- docker mysql container
+- docker tomcat container
+- broadleaf data on mysql
+
+Finctionized lifecycle of a container
+--------------------------------------
+- restore state
+- start container
+- state backuped from time to time, serve clients
+- container stopped
+- state backedup or archived
+- if service died, logs and such should be saved for forensics purposes
+- container erased
+
 TODO
 -------
 - [x] external sonar configuration for sonar-runner gradle plugin
@@ -12,6 +31,7 @@ TODO
 - add jenkins jobs to git
 - scripts for windows
 - scripts for linux
+- docker repository
 
 Questions
 -----------
@@ -19,6 +39,11 @@ Questions
 - docker: how do i get it on a digitalocean instance? vagrant?
 - docker: how to save/provision jenkins settings, plugins, build pipelines?
 - docker: linked containers dependencies when starting? can a container start it's dependencies, wait for them to be completely started, then start itself?
+- how to deliver artifacts in conjunction with docker? is an artifact (war) repository still needed?
+- should a container be stateless? where should all state go? db, logs, all kinds of bits and bytes
+- should we or shouldn't we use latest tags? versions should be under control, no?
+- when giving passwords as parameters to containers, ok in clear? where should they come from?
+- when starting a container, random ports --> localhost or not?
 
 Appliances
 --------------------------
@@ -33,7 +58,7 @@ What if
 Issues
 -------------
 - [x] https://issues.gradle.org/browse/GRADLE-3062 -> upgrade to gradlew 2.2+
-- VOLUME didn't work in Dockerfile
+- [x] VOLUME didn't work in Dockerfile -> you're not supposed to do it like that, state is maneged outside Dockerfile
 
 Dev env
 --------
