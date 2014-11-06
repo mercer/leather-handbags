@@ -44,6 +44,9 @@ Questions
 - should we or shouldn't we use latest tags? versions should be under control, no?
 - when giving passwords as parameters to containers, ok in clear? where should they come from?
 - when starting a container, random ports --> localhost or not?
+- how to debug boot2docker? 
+- how to debug containers that fail to start?
+- postgres?
 
 Appliances
 --------------------------
