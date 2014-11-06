@@ -12,8 +12,6 @@ echo "_______________________________________________"
 docker info
 echo "_______________________________________________"
 
-boot2docker down
-boot2docker up
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 

@@ -16,7 +16,7 @@ TODO
 Questions
 -----------
 - docker: started on 192.168.59.103:8080; how do I expose it on lan? on internet?
-- docker: how do i get it on a digitalocean instance?
+- docker: how do i get it on a digitalocean instance? vagrant?
 - docker: how to save/provision jenkins settings, plugins, build pipelines?
 - docker: linked containers dependencies when starting? can a container start it's dependencies, wait for them to be completely started, then start itself?
 
