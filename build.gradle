@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'sonar-runner'
 apply plugin: 'maven-publish'
+apply plugin: 'application'
 
 group = 'io.mercer.handbags'
 
@@ -56,11 +57,16 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
+run {    
+    systemProperty "SONAR", System.getProperty("SONAR_PORT_9000_TCP_ADDR")
+    systemProperty "SONAR_MYSQL", System.getProperty("SONAR_MYSQL_PORT_3306_TCP_ADDR")
+}
+
 sonarRunner {
     toolVersion = '2.4'
     sonarProperties {
-        property "sonar.host.url", "http://$SONAR_PORT_9000_TCP_ADDR:9000/"
-        property "sonar.jdbc.url", "jdbc:mysql://$SONAR_MYSQL_PORT_3306_TCP_ADDR:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true"
+        property "sonar.host.url", "http://$SONAR:9000/"
+        property "sonar.jdbc.url", "jdbc:mysql://$SONAR_MYSQL:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true"
         property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
         property "sonar.jdbc.username", "sonar"
         property "sonar.jdbc.password", "123qwe"
