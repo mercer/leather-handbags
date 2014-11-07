@@ -14,6 +14,7 @@ TODO
 - scripts for linux
 - docker repository
 - jenkins with java 1.8
+- clean up gradle configuration
 
 Broadleaf
 ----------
@@ -63,6 +64,9 @@ Issues
 -------------
 - [x] https://issues.gradle.org/browse/GRADLE-3062 -> upgrade to gradlew 2.2+
 - [x] VOLUME didn't work in Dockerfile -> you're not supposed to do it like that, state is maneged outside Dockerfile
+- when sharing a volume, owner is set to root of the container; https://github.com/docker/docker/issues/3124 and others;
+  and https://groups.google.com/forum/#!topic/docker-user/cVov44ZFg_c and https://github.com/docker/docker/issues/5189
+  -> only solution so far is to run the container with root :/
 
 Dev env
 --------

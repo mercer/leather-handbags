@@ -1,13 +1,9 @@
 def env = project.hasProperty('env') ? project.getProperty('env') : 'test'
 logger.quiet "Loading configuration for environment '$env'."
-
 def configFile = file("$rootDir/gradle/config/buildConfig.groovy")
 def parsedConfig = new ConfigSlurper(env).parse(configFile.toURL())
-
 def sonarUrl = project.hasProperty('sonar_url') ? project.getProperty('sonar_url') : 'localhost:9000'
 def sonarMysqlUrl = project.hasProperty('sonar_mysql_url') ? project.getProperty('sonar_mysql_url') : 'localhost:3306'
-logger.quiet "Sonar url: '$sonarUrl'."
-logger.quiet "Sonar mysql url: '$sonarMysqlUrl'."
 
 allprojects {
     apply plugin: 'maven-publish'
