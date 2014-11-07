@@ -13,6 +13,7 @@ TODO
 - scripts for windows
 - scripts for linux
 - docker repository
+- jenkins with java 1.8
 
 Broadleaf
 ----------
