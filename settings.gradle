@@ -1,2 +1,6 @@
 rootProject.name = 'leather-handbags'
+include ':application'
+include ':backend'
 
+project(':application').projectDir = "$rootDir/application" as File
+project(':backend').projectDir = "$rootDir/backend" as File

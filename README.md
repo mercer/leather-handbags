@@ -1,6 +1,19 @@
 Leather Handbags: The Demo Store
 ----------------------------------
 
+TODO
+-------
+- transform the leather-handbags into web
+- build the deployable artifact
+- add build info into the artifact
+- sonar-mysql and sonar data outside of containers
+- expose the appliance's ports to localhost
+- extend Dockerfiles to install plugins on jenkins and sonar
+- add jenkins jobs to git
+- scripts for windows
+- scripts for linux
+- docker repository
+
 Broadleaf
 ----------
 - fork DemoSite
@@ -20,23 +33,10 @@ Finctionized lifecycle of a container
 - if service died, logs and such should be saved for forensics purposes
 - container erased
 
-TODO
--------
-- [x] external sonar configuration for sonar-runner gradle plugin
-- build the deployable artifact
-- add build info into the artifact
-- sonar-mysql and sonar data outside of containers
-- expose the appliance's ports to localhost
-- extend Dockerfiles to install plugins on jenkins and sonar
-- add jenkins jobs to git
-- scripts for windows
-- scripts for linux
-- docker repository
-
 Questions
 -----------
 - docker: started on 192.168.59.103:8080; how do I expose it on lan? on internet?
-- docker: how do i get it on a digitalocean instance? vagrant?
+- docker: how do i get it on a Digitalocean instance? vagrant?
 - docker: how to save/provision jenkins settings, plugins, build pipelines?
 - docker: linked containers dependencies when starting? can a container start it's dependencies, wait for them to be completely started, then start itself?
 - how to deliver artifacts in conjunction with docker? is an artifact (war) repository still needed?
@@ -81,7 +81,7 @@ Add docker host to hosts file
 ------------------------------
 echo $(docker-ip) dockerhost | sudo tee -a /etc/hosts
 
-Usefull docker scripts for your shell config
+Useful docker scripts for your shell config
 -------------------------------------------------
 export DOCKER_HOST=tcp://192.168.59.103:2376
 export DOCKER_CERT_PATH=/Users/emilianl/.boot2docker/certs/boot2docker-vm

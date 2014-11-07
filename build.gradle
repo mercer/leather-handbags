@@ -1,9 +1,3 @@
-apply plugin: 'java'
-apply plugin: 'sonar-runner'
-apply plugin: 'maven-publish'
-
-group = 'io.mercer.handbags'
-
 def env = project.hasProperty('env') ? project.getProperty('env') : 'test'
 logger.quiet "Loading configuration for environment '$env'."
 
@@ -16,59 +10,62 @@ logger.quiet "Sonar url: '$sonarUrl'."
 logger.quiet "Sonar mysql url: '$sonarMysqlUrl'."
 
 allprojects {
+    apply plugin: 'maven-publish'
     apply from: "$rootDir/gradle/versioning.gradle"
     ext.config = parsedConfig
+    ext.fullRepoUrl = "$config.binaryRepository.url/$config.binaryRepository.name"
+
+    group = 'io.mercer.handbags'
 }
 
-ext.fullRepoUrl = "$config.binaryRepository.url/$config.binaryRepository.name"
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'sonar-runner'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
+    dependencies {
+        testCompile group: 'junit', name: 'junit', version: '4.11'
+    }
+
+    repositories {
+        jcenter()
+        mavenLocal()
+        maven { url "http://nexus.broadleafcommerce.org/nexus/content/repositories/snapshots/" }
+    }
+
+    sonarRunner {
+        toolVersion = '2.4'
+        sonarProperties {
+            property "sonar.host.url", "http://$sonarUrl/"
+            property "sonar.jdbc.url", "jdbc:mysql://$sonarMysqlUrl/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true"
+            property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+            property "sonar.jdbc.username", "sonar"
+            property "sonar.jdbc.password", "123qwe"
+            property "sonar.sourceEncoding", "UTF-8"
         }
     }
 
-    publications
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+
+        publications
 
 
-    repositories {
-        maven {
-            url fullRepoUrl
+        repositories {
+            maven {
+                url fullRepoUrl
 
-            credentials {
-                username = config.binaryRepository.username
-                password = config.binaryRepository.password
+                credentials {
+                    username = config.binaryRepository.username
+                    password = config.binaryRepository.password
+                }
             }
         }
     }
 }
 
-subprojects {
-    apply plugin: 'java'
-    sonarRunner {
-        sonarProperties {
-            property "sonar.sourceEncoding", "UTF-8"
-        }
-    }
-}
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-}
-
-sonarRunner {
-    toolVersion = '2.4'
-    sonarProperties {
-        property "sonar.host.url", "http://$sonarUrl/"
-        property "sonar.jdbc.url", "jdbc:mysql://$sonarMysqlUrl/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true"
-        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
-        property "sonar.jdbc.username", "sonar"
-        property "sonar.jdbc.password", "123qwe"
-        property "sonar.sourceEncoding", "UTF-8"
-    }
-}
