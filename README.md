@@ -16,10 +16,11 @@ TODO
 - add javadoc task call
 - remove expose ports duplication from own Dockerfile
 - cleanup all the mixes of pipeline config and env config, and all other config; remove hardcoded credentials
-- have sonar run on all
+- [x] have sonar run on all
 - have config pass guest os appliance urls and not component urls (fetch ports/host os ip)
-- fetch build number to version strategy
+- [x] fetch build number to version strategy
 - use artifactory as proxy
+- guest os system time
 
 Broadleaf
 ----------

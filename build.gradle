@@ -4,9 +4,6 @@ def env = project.hasProperty('env') ? project.getProperty('env') : 'test'
 logger.quiet "Loading configuration for environment '$env'."
 def configFile = file("$rootDir/gradle/config/buildConfig.groovy")
 def parsedConfig = new ConfigSlurper(env).parse(configFile.toURL())
-def sonarUrl = project.hasProperty('sonar_url') ? project.getProperty('sonar_url') : 'localhost:9000'
-def sonarMysqlUrl = project.hasProperty('sonar_mysql_url') ? project.getProperty('sonar_mysql_url') : 'localhost:3306'
-def artifactoryUrl = project.hasProperty('artifactory_url') ? project.getProperty('artifactory_url') : 'localhost:8081/artifactory'
 
 logger.quiet "HOME: $System.env.HOME"
 logger.quiet "BUILD_NUMBER: $System.env.BUILD_NUMBER"
@@ -15,8 +12,8 @@ logger.quiet "ARTIFACTORY_PORT_8080_TCP_ADDR: $System.env.ARTIFACTORY_PORT_8080_
 sonarRunner {
     toolVersion = '2.4'
     sonarProperties {
-        property "sonar.host.url", "http://$sonarUrl/"
-        property "sonar.jdbc.url", "jdbc:mysql://$sonarMysqlUrl/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true"
+        property "sonar.host.url", "http://$System.env.SONAR_PORT_9000_TCP_ADDR:9000"
+        property "sonar.jdbc.url", "jdbc:mysql://$System.env.SONAR_MYSQL_PORT_3306_TCP_ADDR/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true"
         property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
         property "sonar.jdbc.username", "sonar"
         property "sonar.jdbc.password", "123qwe"
@@ -28,7 +25,7 @@ allprojects {
     apply plugin: 'maven-publish'
     apply from: "$rootDir/gradle/versioning.gradle"
     ext.config = parsedConfig
-    ext.fullRepoUrl = "http://$artifactoryUrl/artifactory/$config.binaryRepository.name"
+    ext.fullRepoUrl = "http://$System.env.ARTIFACTORY_PORT_8080_TCP_ADDR:8080/artifactory/$config.binaryRepository.name"
 
     group = 'io.mercer.handbags'
 
