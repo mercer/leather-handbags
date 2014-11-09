@@ -5,9 +5,7 @@ logger.quiet "Loading configuration for environment '$env'."
 def configFile = file("$rootDir/gradle/config/buildConfig.groovy")
 def parsedConfig = new ConfigSlurper(env).parse(configFile.toURL())
 
-logger.quiet "HOME: $System.env.HOME"
-logger.quiet "BUILD_NUMBER: $System.env.BUILD_NUMBER"
-logger.quiet "ARTIFACTORY_PORT_8080_TCP_ADDR: $System.env.ARTIFACTORY_PORT_8080_TCP_ADDR"
+logger.quiet "REGISTRY_PORT_5000_TCP_ADDR: $System.env.REGISTRY_PORT_5000_TCP_ADDR"
 
 sonarRunner {
     toolVersion = '2.4'

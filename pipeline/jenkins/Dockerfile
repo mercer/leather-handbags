@@ -1,3 +1,5 @@
 FROM jenkins:weekly
 MAINTAINER Mercer Traieste <mercer.traieste@gmail.com>
-EXPOSE 8080
+USER root
+RUN apt-get update && apt-get install docker.io -y
+USER jenkins

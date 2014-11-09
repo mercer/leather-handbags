@@ -19,8 +19,9 @@ TODO
 - [x] have sonar run on all
 - have config pass guest os appliance urls and not component urls (fetch ports/host os ip)
 - [x] fetch build number to version strategy
-- use artifactory as proxy
+- use artifactory as proxy/mirroring
 - [x] fix boot2docker os system time
+- mirroring with docker registry
 
 Broadleaf
 ----------
@@ -77,6 +78,8 @@ Issues
 - when sharing a volume, owner is set to root of the container; https://github.com/docker/docker/issues/3124 and others;
   and https://groups.google.com/forum/#!topic/docker-user/cVov44ZFg_c and https://github.com/docker/docker/issues/5189
   -> only solution so far is to run the container with root :/
+- local insecure private docker registry: see https://github.com/docker/docker/issues/8887#issuecomment-61864331 and
+  http://wanderingquandaries.blogspot.ro/2014/11/setting-up-insecure-docker-registry.html
 
 Dev env
 --------
