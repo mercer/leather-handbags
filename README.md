@@ -3,18 +3,17 @@ Leather Handbags: The Demo Store
 
 TODO
 -------
-- transform the leather-handbags into web
-- build the deployable artifact
-- add build info into the artifact
-- sonar-mysql and sonar data outside of containers
-- expose the appliance's ports to localhost
-- extend Dockerfiles to install plugins on jenkins and sonar
-- add jenkins jobs to git
+- [x] transform the leather-handbags into web
+- [x] build the deployable artifact
+- [x] expose the appliance's ports to localhost
+- docker artifactory
+- docker repository
 - scripts for windows
 - scripts for linux
-- docker repository
 - jenkins with java 1.8
 - clean up gradle configuration
+- ONBUILD trigger to pack a deployable artifact with a container (tomcat)
+- add javadoc task call
 
 Broadleaf
 ----------
@@ -25,7 +24,7 @@ Broadleaf
 - docker tomcat container
 - broadleaf data on mysql
 
-Finctionized lifecycle of a container
+Fictionized lifecycle of a container
 --------------------------------------
 - restore state
 - start container
@@ -37,7 +36,7 @@ Finctionized lifecycle of a container
 
 Questions
 -----------
-- docker: started on 192.168.59.103:8080; how do I expose it on lan? on internet?
+- [x] docker: started on 192.168.59.103:8080; how do I expose it on lan? on internet?
 - docker: how do i get it on a Digitalocean instance? vagrant?
 - docker: how to save/provision jenkins settings, plugins, build pipelines?
 - docker: linked containers dependencies when starting? can a container start it's dependencies, wait for them to be completely started, then start itself?
@@ -49,6 +48,10 @@ Questions
 - how to debug boot2docker? 
 - how to debug containers that fail to start?
 - postgres?
+- add build info together with artifact?
+- extend Dockerfiles to install plugins on jenkins and sonar?
+- jenkins jobs to git?
+- how much space do container instances occupy? what about container snapshots?
 
 Appliances
 --------------------------

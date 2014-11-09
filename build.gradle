@@ -4,12 +4,13 @@ def configFile = file("$rootDir/gradle/config/buildConfig.groovy")
 def parsedConfig = new ConfigSlurper(env).parse(configFile.toURL())
 def sonarUrl = project.hasProperty('sonar_url') ? project.getProperty('sonar_url') : 'localhost:9000'
 def sonarMysqlUrl = project.hasProperty('sonar_mysql_url') ? project.getProperty('sonar_mysql_url') : 'localhost:3306'
+def artifactoryUrl = project.hasProperty('artifactory_url') ? project.getProperty('artifactory_url') : 'localhost:8081/artifactory'
 
 allprojects {
     apply plugin: 'maven-publish'
     apply from: "$rootDir/gradle/versioning.gradle"
     ext.config = parsedConfig
-    ext.fullRepoUrl = "$config.binaryRepository.url/$config.binaryRepository.name"
+    ext.fullRepoUrl = "http://$artifactoryUrl/$config.binaryRepository.name"
 
     group = 'io.mercer.handbags'
 }
@@ -48,14 +49,10 @@ subprojects {
                 from components.java
             }
         }
-
         publications
-
-
         repositories {
             maven {
                 url fullRepoUrl
-
                 credentials {
                     username = config.binaryRepository.username
                     password = config.binaryRepository.password
