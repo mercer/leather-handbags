@@ -8,6 +8,7 @@ TODO
 - [x] expose the appliance's ports to localhost
 - [x] docker artifactory
 - docker repository
+- start docker on jenkins
 - scripts for windows
 - scripts for linux
 - jenkins with java 1.8
@@ -114,3 +115,6 @@ docker-enter() {
   boot2docker ssh -t sudo /var/lib/boot2docker/docker-enter "$@"
 }
 
+Very small docker containers
+--------------------------------
+- docker pull scratch
