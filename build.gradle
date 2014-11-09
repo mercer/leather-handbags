@@ -8,12 +8,6 @@ def sonarUrl = project.hasProperty('sonar_url') ? project.getProperty('sonar_url
 def sonarMysqlUrl = project.hasProperty('sonar_mysql_url') ? project.getProperty('sonar_mysql_url') : 'localhost:3306'
 def artifactoryUrl = project.hasProperty('artifactory_url') ? project.getProperty('artifactory_url') : 'localhost:8081/artifactory'
 
-repositories {
-    jcenter()
-    mavenLocal()
-    maven { url "http://nexus.broadleafcommerce.org/nexus/content/repositories/snapshots/" }
-}
-
 sonarRunner {
     toolVersion = '2.4'
     sonarProperties {
@@ -33,6 +27,11 @@ allprojects {
     ext.fullRepoUrl = "http://$artifactoryUrl/artifactory/$config.binaryRepository.name"
 
     group = 'io.mercer.handbags'
+
+    repositories {
+        jcenter()
+        maven { url "http://nexus.broadleafcommerce.org/nexus/content/repositories/snapshots/" }
+    }
 
     publishing {
         repositories {
