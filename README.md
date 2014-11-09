@@ -6,7 +6,7 @@ TODO
 - [x] transform the leather-handbags into web
 - [x] build the deployable artifact
 - [x] expose the appliance's ports to localhost
-- docker artifactory
+- [x] docker artifactory
 - docker repository
 - scripts for windows
 - scripts for linux
@@ -20,7 +20,7 @@ TODO
 - have config pass guest os appliance urls and not component urls (fetch ports/host os ip)
 - [x] fetch build number to version strategy
 - use artifactory as proxy
-- guest os system time
+- [x] fix boot2docker os system time
 
 Broadleaf
 ----------
