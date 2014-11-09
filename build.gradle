@@ -8,6 +8,10 @@ def sonarUrl = project.hasProperty('sonar_url') ? project.getProperty('sonar_url
 def sonarMysqlUrl = project.hasProperty('sonar_mysql_url') ? project.getProperty('sonar_mysql_url') : 'localhost:3306'
 def artifactoryUrl = project.hasProperty('artifactory_url') ? project.getProperty('artifactory_url') : 'localhost:8081/artifactory'
 
+logger.quiet "HOME: $System.env.HOME"
+logger.quiet "BUILD_NUMBER: $System.env.BUILD_NUMBER"
+logger.quiet "ARTIFACTORY_PORT_8080_TCP_ADDR: $System.env.ARTIFACTORY_PORT_8080_TCP_ADDR"
+
 sonarRunner {
     toolVersion = '2.4'
     sonarProperties {
