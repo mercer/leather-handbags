@@ -13,6 +13,18 @@ allprojects {
     ext.fullRepoUrl = "http://$artifactoryUrl/artifactory/$config.binaryRepository.name"
 
     group = 'io.mercer.handbags'
+
+    publishing {
+        repositories {
+            maven {
+                url fullRepoUrl
+                credentials {
+                    username = config.binaryRepository.username
+                    password = config.binaryRepository.password
+                }
+            }
+        }
+    }
 }
 
 subprojects {
@@ -43,22 +55,5 @@ subprojects {
         }
     }
 
-    publishing {
-        publications {
-            mavenJava(MavenPublication) {
-                from components.war
-            }
-        }
-        publications
-        repositories {
-            maven {
-                url fullRepoUrl
-                credentials {
-                    username = config.binaryRepository.username
-                    password = config.binaryRepository.password
-                }
-            }
-        }
-    }
 }
 

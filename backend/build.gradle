@@ -7,3 +7,11 @@ dependencies {
     compile project(':application')
     providedCompile group: 'javax.servlet', name: 'servlet-api', version:'2.5'
 }
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.web
+        }
+    }
+    publications
+}
