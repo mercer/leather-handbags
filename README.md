@@ -14,6 +14,7 @@ TODO
 - clean up gradle configuration
 - ONBUILD trigger to pack a deployable artifact with a container (tomcat)
 - add javadoc task call
+- remove expose ports duplication from own Dockerfile
 
 Broadleaf
 ----------
