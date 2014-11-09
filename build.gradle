@@ -1,3 +1,5 @@
+apply plugin: 'sonar-runner'
+
 def env = project.hasProperty('env') ? project.getProperty('env') : 'test'
 logger.quiet "Loading configuration for environment '$env'."
 def configFile = file("$rootDir/gradle/config/buildConfig.groovy")
@@ -29,7 +31,6 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
-    apply plugin: 'sonar-runner'
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
 
@@ -43,17 +44,16 @@ subprojects {
         maven { url "http://nexus.broadleafcommerce.org/nexus/content/repositories/snapshots/" }
     }
 
-    sonarRunner {
-        toolVersion = '2.4'
-        sonarProperties {
-            property "sonar.host.url", "http://$sonarUrl/"
-            property "sonar.jdbc.url", "jdbc:mysql://$sonarMysqlUrl/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true"
-            property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
-            property "sonar.jdbc.username", "sonar"
-            property "sonar.jdbc.password", "123qwe"
-            property "sonar.sourceEncoding", "UTF-8"
-        }
-    }
-
 }
 
+sonarRunner {
+    toolVersion = '2.4'
+    sonarProperties {
+        property "sonar.host.url", "http://$sonarUrl/"
+        property "sonar.jdbc.url", "jdbc:mysql://$sonarMysqlUrl/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true"
+        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+        property "sonar.jdbc.username", "sonar"
+        property "sonar.jdbc.password", "123qwe"
+        property "sonar.sourceEncoding", "UTF-8"
+    }
+}

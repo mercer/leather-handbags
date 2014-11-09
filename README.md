@@ -19,6 +19,7 @@ TODO
 - have sonar run on all
 - have config pass guest os appliance urls and not component urls (fetch ports/host os ip)
 - fetch build number to version strategy
+- use artifactory as proxy
 
 Broadleaf
 ----------
