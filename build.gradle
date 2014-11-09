@@ -8,6 +8,24 @@ def sonarUrl = project.hasProperty('sonar_url') ? project.getProperty('sonar_url
 def sonarMysqlUrl = project.hasProperty('sonar_mysql_url') ? project.getProperty('sonar_mysql_url') : 'localhost:3306'
 def artifactoryUrl = project.hasProperty('artifactory_url') ? project.getProperty('artifactory_url') : 'localhost:8081/artifactory'
 
+repositories {
+    jcenter()
+    mavenLocal()
+    maven { url "http://nexus.broadleafcommerce.org/nexus/content/repositories/snapshots/" }
+}
+
+sonarRunner {
+    toolVersion = '2.4'
+    sonarProperties {
+        property "sonar.host.url", "http://$sonarUrl/"
+        property "sonar.jdbc.url", "jdbc:mysql://$sonarMysqlUrl/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true"
+        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+        property "sonar.jdbc.username", "sonar"
+        property "sonar.jdbc.password", "123qwe"
+        property "sonar.sourceEncoding", "UTF-8"
+    }
+}
+
 allprojects {
     apply plugin: 'maven-publish'
     apply from: "$rootDir/gradle/versioning.gradle"
@@ -38,22 +56,4 @@ subprojects {
         testCompile group: 'junit', name: 'junit', version: '4.11'
     }
 
-    repositories {
-        jcenter()
-        mavenLocal()
-        maven { url "http://nexus.broadleafcommerce.org/nexus/content/repositories/snapshots/" }
-    }
-
-}
-
-sonarRunner {
-    toolVersion = '2.4'
-    sonarProperties {
-        property "sonar.host.url", "http://$sonarUrl/"
-        property "sonar.jdbc.url", "jdbc:mysql://$sonarMysqlUrl/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true"
-        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
-        property "sonar.jdbc.username", "sonar"
-        property "sonar.jdbc.password", "123qwe"
-        property "sonar.sourceEncoding", "UTF-8"
-    }
 }
