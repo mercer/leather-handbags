@@ -23,6 +23,8 @@ TODO
 - use artifactory as proxy/mirroring
 - [x] fix boot2docker os system time
 - mirroring with docker registry
+- shipyard?
+- start mysql and tomcat in delivered container?
 
 Broadleaf
 ----------
@@ -61,6 +63,7 @@ Questions
 - extend Dockerfiles to install plugins on jenkins and sonar?
 - jenkins jobs to git?
 - how much space do container instances occupy? what about container snapshots?
+- sidekick container specialized on backup?
 
 Appliances
 --------------------------
