@@ -11,4 +11,9 @@ environments {
             hostname = "localhost"
         }
     }
+    acceptance {
+        server {
+            hostname = "localhost"
+        }
+    }
 }

@@ -5,8 +5,6 @@ logger.quiet "Loading configuration for environment '$env'."
 def configFile = file("$rootDir/gradle/config/buildConfig.groovy")
 def parsedConfig = new ConfigSlurper(env).parse(configFile.toURL())
 
-logger.quiet "REGISTRY_PORT_5000_TCP_ADDR: $System.env.REGISTRY_PORT_5000_TCP_ADDR"
-
 sonarRunner {
     toolVersion = '2.4'
     sonarProperties {
@@ -53,5 +51,8 @@ subprojects {
     dependencies {
         testCompile group: 'junit', name: 'junit', version: '4.11'
     }
+}
 
+task acceptance {
+    logger.quiet "Running all automated acceptance tests ..."
 }
