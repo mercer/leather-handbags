@@ -1,4 +1,5 @@
 apply plugin: 'sonar-runner'
+apply plugin: 'build-dashboard'
 
 def env = project.hasProperty('env') ? project.getProperty('env') : 'test'
 logger.quiet "Loading configuration for environment '$env'."
